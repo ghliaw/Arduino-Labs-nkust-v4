@@ -1,0 +1,271 @@
+[
+    {
+        "id": "25edd0b4.93b03",
+        "type": "tab",
+        "label": "Arduino_Agent",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "671087d4.c773f8",
+        "type": "serial in",
+        "z": "25edd0b4.93b03",
+        "name": "",
+        "serial": "74f04f9e.06c45",
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "7e67ee63.1561c",
+                "eb9c4812.c598d8",
+                "cffc241f.fef2d8"
+            ]
+        ]
+    },
+    {
+        "id": "7e67ee63.1561c",
+        "type": "debug",
+        "z": "25edd0b4.93b03",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c25446a8.98a3a8",
+        "type": "mqtt out",
+        "z": "25edd0b4.93b03",
+        "name": "publish temp",
+        "topic": "ghliaw0709/temp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d7c802ea.a93e9",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "eb9c4812.c598d8",
+        "type": "function",
+        "z": "25edd0b4.93b03",
+        "name": "get temp",
+        "func": "msg.payload = msg.payload.split(\",\")[0];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "c25446a8.98a3a8"
+            ]
+        ]
+    },
+    {
+        "id": "cffc241f.fef2d8",
+        "type": "function",
+        "z": "25edd0b4.93b03",
+        "name": "get hum",
+        "func": "msg.payload = msg.payload.split(\",\")[1];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "de7ffe3b.cf1f3"
+            ]
+        ]
+    },
+    {
+        "id": "de7ffe3b.cf1f3",
+        "type": "mqtt out",
+        "z": "25edd0b4.93b03",
+        "name": "publish hum",
+        "topic": "ghliaw0709/hum",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d7c802ea.a93e9",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "2b474318.1c97bc",
+        "type": "mqtt in",
+        "z": "25edd0b4.93b03",
+        "name": "",
+        "topic": "ghliaw0709/led_control",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "d7c802ea.a93e9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 300,
+        "y": 300,
+        "wires": [
+            [
+                "f0ff8c8f.c145c"
+            ]
+        ]
+    },
+    {
+        "id": "f0ff8c8f.c145c",
+        "type": "switch",
+        "z": "25edd0b4.93b03",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "27e92f5.5fddbd"
+            ],
+            [
+                "dc8e5bec.1e2bb8"
+            ]
+        ]
+    },
+    {
+        "id": "27e92f5.5fddbd",
+        "type": "function",
+        "z": "25edd0b4.93b03",
+        "name": "add NL",
+        "func": "msg.payload += \"\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "e9654b16.217268"
+            ]
+        ]
+    },
+    {
+        "id": "dc8e5bec.1e2bb8",
+        "type": "function",
+        "z": "25edd0b4.93b03",
+        "name": "add NL",
+        "func": "msg.payload += \"\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 320,
+        "wires": [
+            [
+                "cd79ceab.a0ded"
+            ]
+        ]
+    },
+    {
+        "id": "e9654b16.217268",
+        "type": "serial out",
+        "z": "25edd0b4.93b03",
+        "name": "LED ON",
+        "serial": "74f04f9e.06c45",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "cd79ceab.a0ded",
+        "type": "serial out",
+        "z": "25edd0b4.93b03",
+        "name": "LED OFF",
+        "serial": "74f04f9e.06c45",
+        "x": 800,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "74f04f9e.06c45",
+        "type": "serial-port",
+        "serialport": "COM4",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "d7c802ea.a93e9",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

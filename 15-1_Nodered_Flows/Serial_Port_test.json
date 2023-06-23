@@ -1,0 +1,145 @@
+[
+    {
+        "id": "438ec2dd.a50dcc",
+        "type": "tab",
+        "label": "Serial Port test",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fba3e4be.6c36e8",
+        "type": "serial in",
+        "z": "438ec2dd.a50dcc",
+        "name": "COM Port In",
+        "serial": "74f04f9e.06c45",
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "424e2006.66c5b"
+            ]
+        ]
+    },
+    {
+        "id": "424e2006.66c5b",
+        "type": "debug",
+        "z": "438ec2dd.a50dcc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1ac78cf3.560ad3",
+        "type": "inject",
+        "z": "438ec2dd.a50dcc",
+        "name": "Send \"on\"",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "350e2f1f.30caf"
+            ]
+        ]
+    },
+    {
+        "id": "4d7823d9.62e6dc",
+        "type": "inject",
+        "z": "438ec2dd.a50dcc",
+        "name": "Send \"off\"",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "x": 300,
+        "y": 240,
+        "wires": [
+            [
+                "350e2f1f.30caf"
+            ]
+        ]
+    },
+    {
+        "id": "350e2f1f.30caf",
+        "type": "function",
+        "z": "438ec2dd.a50dcc",
+        "name": "add NL",
+        "func": "msg.payload += \"\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "a10837a9.e46e18"
+            ]
+        ]
+    },
+    {
+        "id": "a10837a9.e46e18",
+        "type": "serial out",
+        "z": "438ec2dd.a50dcc",
+        "name": "COM Port Out",
+        "serial": "74f04f9e.06c45",
+        "x": 640,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "74f04f9e.06c45",
+        "type": "serial-port",
+        "serialport": "COM4",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]
