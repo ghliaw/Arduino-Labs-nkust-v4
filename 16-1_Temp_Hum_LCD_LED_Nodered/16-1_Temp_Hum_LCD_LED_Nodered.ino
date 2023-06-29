@@ -11,7 +11,7 @@
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
 DHT dht(DHTPIN, DHTTYPE);
-LiquidCrystal_PCF8574 lcd(0x20); // set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_PCF8574 lcd(0x27); // set the LCD address to 0x27 for a 16 chars and 2 line display
 unsigned long dht_last_time;
 
 void setup() 
